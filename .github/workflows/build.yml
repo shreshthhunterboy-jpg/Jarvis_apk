@@ -1,4 +1,21 @@
-Jarvis.apk ( tumhara Repo )
-  └── .github
-        └── workflows
-              └── build.yml
+name: Build JARVIS APK
+on: [push, workflow_dispatch]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build APK from your JARVIS Link
+        uses: MH4GF/make-android-apk-from-website@main
+        with:
+          website-url: https://ais-pre-wwlsgp2b6kdu7i4svnspzg-200704730435.asia-southeast1.run.app
+          app-name: JARVIS MARK-X
+          package-name: com.shresth.jarvis
+
+      - name: Upload APK File
+        uses: actions/upload-artifact@v4
+        with:
+          name: JARVIS-APK-File
+          path: "*.apk"
